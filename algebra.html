@@ -3,14 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>GN MATH</title>
+<title>HAIL MARY</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
 
 <style>
-/* ====================== HAIL MARY INSPIRED COSMIC THEME ====================== */
 :root{
   --bg-top:#04070d; --bg-mid:#061018; --bg-bottom:#020609;
   --neb-a:rgba(20,150,110,0.26); --neb-b:rgba(15,120,150,0.22); --neb-c:rgba(30,90,180,0.15);
@@ -18,17 +17,16 @@
   --title-font:'Martian Mono','JetBrains Mono',ui-monospace,monospace;
   --accent:#34f0a0;
   --text:#eef4f1;
-  --card-bg:rgba(15,25,35,0.85);
-  --border:rgba(52,240,160,0.15);
+  --card-bg:rgba(15,25,35,0.88);
+  --border:rgba(52,240,160,0.18);
 }
 
 *{ margin:0; padding:0; box-sizing:border-box; }
-html,body{ height:100%; overflow:hidden; }
+html,body{ height:100%; overflow:hidden; font-family:var(--title-font); }
 
 body{
   background:radial-gradient(140% 120% at 50% -10%, var(--bg-top) 0%, var(--bg-mid) 42%, var(--bg-bottom) 100%);
-  color:var(--text); font-family:var(--title-font); position:relative;
-  -webkit-font-smoothing:antialiased;
+  color:var(--text); position:relative;
 }
 
 /* Background Layers */
@@ -42,115 +40,73 @@ body{
 .stars{ z-index:-8; }
 .star-layer{ position:absolute; top:0; left:0; width:1px; height:1px; border-radius:50%; }
 
-.vignette{ z-index:-2; background:radial-gradient(120% 90% at 50% 45%, transparent 52%, rgba(0,0,0,.75) 100%); }
+.vignette{ z-index:-2; background:radial-gradient(120% 90% at 50% 45%, transparent 52%, rgba(0,0,0,.78) 100%); }
 .grain{ z-index:-1; opacity:0.06; mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"); }
 
-/* Header / Title */
+/* Header */
 header{
   position:fixed; top:0; left:0; right:0; z-index:100;
-  padding:1.5rem 5vw; display:flex; justify-content:space-between; align-items:center;
+  padding:1.8rem 5vw; display:flex; justify-content:space-between; align-items:center;
   background:linear-gradient(to bottom, rgba(4,7,13,0.95), transparent);
   border-bottom:1px solid var(--border);
 }
 
 .title{
-  font-family:var(--title-font); font-weight:800; font-size:clamp(1.8rem, 5vw, 3.2rem);
-  letter-spacing:.05em; text-transform:uppercase; color:var(--text);
-  text-shadow:0 0 30px rgba(52,240,160,.3);
-}
-
-.title .triA{
-  display:inline-block; width:1ch; vertical-align:baseline; position:relative;
-}
-.title .triA svg{
-  position:absolute; left:50%; bottom:0; transform:translateX(-50%);
-  height:0.78em; width:0.68em; overflow:visible; fill:var(--accent);
-  filter:drop-shadow(0 0 12px var(--accent));
+  font-size:clamp(2.2rem, 6vw, 3.8rem); font-weight:800; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--text);
+  text-shadow:0 0 30px rgba(52,240,160,.4);
 }
 
 /* Main Content */
-main{
-  padding-top:100px; min-height:100vh; position:relative; z-index:2;
-  padding-bottom:80px;
+main{ padding-top:110px; min-height:100vh; position:relative; z-index:2; }
+
+/* Hero */
+.hero{
+  text-align:center; padding:10vh 5vw 6vh;
+}
+.hero h1{
+  font-size:clamp(3.8rem, 13vw, 10rem); line-height:.88; margin-bottom:1rem;
+  text-shadow:0 0 50px rgba(52,240,160,.25);
 }
 
-.section-header{
-  text-align:center; margin:3rem 0 1.5rem;
-  font-size:1.4rem; letter-spacing:0.2em; opacity:0.9;
-}
-
-/* Game Cards - Space Style */
+/* Game Grid */
 .grid-layout{
-  display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
-  gap:1.8rem; padding:0 5vw; max-width:1600px; margin:0 auto;
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
+  gap:2rem; padding:0 5vw; max-width:1800px; margin:0 auto;
 }
 
 .game-card{
   background:var(--card-bg); border:1px solid var(--border);
-  border-radius:12px; overflow:hidden; transition:all .3s ease;
-  backdrop-filter:blur(8px); box-shadow:0 10px 30px rgba(0,0,0,.6);
+  border-radius:14px; overflow:hidden; transition:all .35s ease;
+  backdrop-filter:blur(10px); box-shadow:0 15px 35px rgba(0,0,0,.7);
 }
 
 .game-card:hover{
-  transform:translateY(-12px) scale(1.03);
+  transform:translateY(-15px) scale(1.04);
   border-color:var(--accent);
-  box-shadow:0 20px 40px rgba(52,240,160,.15);
+  box-shadow:0 25px 50px rgba(52,240,160,.2);
 }
 
 .card-thumb{
-  width:100%; height:180px; object-fit:cover;
-  filter:brightness(0.95) contrast(1.1);
+  width:100%; height:190px; object-fit:cover;
 }
 
-.card-body{
-  padding:1rem 1.2rem;
+.card-body{ padding:1.1rem 1.3rem; }
+.card-title{ font-size:1.15rem; margin-bottom:0.5rem; }
+.card-tags{ font-size:0.82rem; opacity:0.75; }
+
+/* Other elements */
+#zoneViewer, .modal-overlay{
+  background:rgba(2,6,9,0.97) !important;
 }
 
-.card-title{
-  font-size:1.1rem; margin-bottom:0.4rem; line-height:1.2;
-}
-
-.card-tags{
-  font-size:0.8rem; opacity:0.7; letter-spacing:0.5px;
-}
-
-/* Hero */
-.hero{
-  text-align:center; padding:8vh 5vw 6vh; position:relative;
-}
-
-.hero h1{
-  font-size:clamp(3.5rem, 12vw, 9rem); line-height:.9; margin-bottom:1.5rem;
-  text-shadow:0 0 40px rgba(52,240,160,.25);
-}
-
-/* Controls */
-.controls{
-  display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;
-  margin:2rem 0;
-}
-
-/* Modal & Zone Viewer keep original functionality but styled */
-.modal-overlay, #zoneViewer{
-  background:rgba(2,6,9,0.98) !important;
-}
-
-/* Animations */
-@keyframes nebDrift{
-  from{transform:translate3d(0,0,0) scale(1);}
-  to{transform:translate3d(3%,-4%,0) scale(1.12);}
-}
-
-@keyframes rise{
-  from{opacity:0; transform:translateY(40px);}
-  to{opacity:1; transform:none;}
-}
+@keyframes nebDrift{ from{transform:translate3d(0,0,0) scale(1);} to{transform:translate3d(3%,-4%,0) scale(1.12);} }
 </style>
 </head>
 <body>
 
-<!-- Background Layers -->
+<!-- Cosmic Background -->
 <div class="layer nebula">
   <span class="neb-1"></span>
   <span class="neb-2"></span>
@@ -161,36 +117,180 @@ main{
 <div class="layer grain"></div>
 
 <header>
-  <div class="title">
-    GN<span class="triA"><svg viewBox="0 0 84 100" preserveAspectRatio="none"><path fill-rule="evenodd" d="M42 2 L82 98 L2 98 Z M42 34 L62 82 L22 82 Z"/></svg></span>ATH
-  </div>
-  <div class="controls">
-    <input type="text" id="searchBar" placeholder="SEARCH ZONES..." 
-           style="background:rgba(255,255,255,0.08); border:1px solid var(--border); color:white; padding:0.8rem 1.2rem; border-radius:999px; width:280px; font-family:inherit;">
-    <button onclick="toggleTheme()" style="background:rgba(255,255,255,0.1); border:1px solid var(--accent); color:var(--accent);">CLASSIC</button>
-  </div>
+  <div class="title">HAIL MARY</div>
 </header>
 
 <main>
-  <!-- Your existing content goes here (grids, sections, etc.) -->
-  <div id="modernView">
-    <!-- Hero -->
-    <div class="hero">
-      <h1 style="animation: rise 1.2s ease backwards;">UNBLOCKED ZONES</h1>
-      <p style="font-size:1.1rem; opacity:0.8; max-width:600px; margin:0 auto;">
-        Cosmic collection of games • proxies • tools
-      </p>
-    </div>
+  <div class="hero">
+    <h1>GAMES</h1>
+  </div>
 
-    <!-- Rest of your original grids, swipers, etc. go here -->
-    <!-- (I kept the structure but you can paste your original body content) -->
+  <!-- Modern View -->
+  <div id="modernView">
+    <div class="section-header">
+      <div class="section-title">Featured Zones</div>
+    </div>
+    <div class="grid-layout" id="featuredGrid"></div>
+
+    <div class="section-header">
+      <div class="section-title">Trending This Week</div>
+    </div>
+    <div class="grid-layout" id="trendingWrapper"></div>
+
+    <div class="section-header">
+      <div class="section-title">All Games</div>
+    </div>
+    <div class="grid-layout" id="allGamesGrid"></div>
+  </div>
+
+  <!-- Search View -->
+  <div id="searchView" class="hidden">
+    <div class="section-header">
+      <div class="section-title">Search Results</div>
+    </div>
+    <div class="grid-layout" id="searchResults"></div>
   </div>
 </main>
 
-<!-- Keep your original scripts and functionality -->
-<script>
-// Paste your original JavaScript here (the big script block from the original file)
-</script>
+<!-- Zone Viewer -->
+<div id="zoneViewer" style="display:none; position:fixed; inset:0; z-index:1000; background:#020609;">
+  <div class="zone-header" style="padding:1rem 2rem; background:rgba(4,7,13,0.95); display:flex; justify-content:space-between; align-items:center;">
+    <div>
+      <h2 id="zoneName" style="color:var(--accent);">Zone</h2>
+      <a id="zoneAuthor" href="#" target="_blank" style="color:#88ccaa; font-size:0.9rem;"></a>
+    </div>
+    <div>
+      <button onclick="fullscreenZone()" style="margin:0 0.5rem;">Fullscreen</button>
+      <button onclick="aboutBlank()">New Tab</button>
+      <button onclick="downloadZone()">Download</button>
+      <button onclick="closeZone()" style="background:#e74c3c;">Close</button>
+    </div>
+  </div>
+  <iframe id="zoneFrame" style="width:100%; height:calc(100vh - 70px); border:none;"></iframe>
+</div>
 
+<script>
+// ==================== ORIGINAL GN-MATH LOGIC (kept intact) ====================
+const CONFIG = {
+    zones: "https://cdn.jsdelivr.net/gh/freebuisness/assets@latest/zones.json",
+    covers: "https://cdn.jsdelivr.net/gh/freebuisness/covers@main",
+    html: "https://cdn.jsdelivr.net/gh/freebuisness/html@main"
+};
+
+let state = { games: [], hits: {} };
+
+async function init() {
+    try {
+        const res = await fetch(CONFIG.zones + "?t=" + Date.now());
+        state.games = await res.json();
+        
+        state.games[0].featured = true;
+        renderApp();
+    } catch(e) {
+        console.error("Failed to load games", e);
+    }
+}
+
+function resolveUrl(u) {
+    return u.replace("{COVER_URL}", CONFIG.covers).replace("{HTML_URL}", CONFIG.html);
+}
+
+function renderApp() {
+    // Featured
+    const featured = state.games.filter(g => g.featured || g.special?.includes('popular')).slice(0, 8);
+    document.getElementById('featuredGrid').innerHTML = featured.map(g => createCard(g)).join('');
+
+    // All Games
+    document.getElementById('allGamesGrid').innerHTML = state.games.map(g => createCard(g)).join('');
+}
+
+function createCard(g) {
+    return `
+    <div class="game-card" onclick="openGame(${g.id})">
+        <img src="${resolveUrl(g.cover)}" class="card-thumb" loading="lazy">
+        <div class="card-body">
+            <div class="card-title">${g.name}</div>
+            <div class="card-tags">${(g.special || []).slice(0,2).join(', ')}</div>
+        </div>
+    </div>`;
+}
+
+async function openGame(id) {
+    const g = state.games.find(x => x.id === id);
+    if (!g) return;
+
+    document.getElementById('zoneName').textContent = g.name;
+    document.getElementById('zoneAuthor').textContent = g.author ? "by " + g.author : "";
+    if (g.authorLink) document.getElementById('zoneAuthor').href = g.authorLink;
+
+    const v = document.getElementById('zoneViewer');
+    const f = document.getElementById('zoneFrame');
+    v.style.display = 'flex';
+
+    try {
+        const u = resolveUrl(g.url);
+        const r = await fetch(u + "?t=" + Date.now());
+        let h = await r.text();
+        f.contentDocument.open();
+        f.contentDocument.write(h);
+        f.contentDocument.close();
+    } catch(e) {
+        alert("Failed to load game");
+        closeZone();
+    }
+}
+
+function closeZone() {
+    document.getElementById('zoneViewer').style.display = 'none';
+    document.getElementById('zoneFrame').src = '';
+}
+
+function fullscreenZone() {
+    const f = document.getElementById('zoneFrame');
+    if (f.requestFullscreen) f.requestFullscreen();
+}
+
+function aboutBlank() {
+    const id = document.getElementById('zoneName').textContent;
+    const g = state.games.find(x => x.name === id);
+    if (g) window.open(resolveUrl(g.url), '_blank');
+}
+
+function downloadZone() {
+    const id = document.getElementById('zoneName').textContent;
+    const g = state.games.find(x => x.name === id);
+    if (!g) return;
+    fetch(resolveUrl(g.url)).then(r=>r.text()).then(t => {
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(new Blob([t], {type: "text/html"}));
+        a.download = g.name + ".html";
+        a.click();
+    });
+}
+
+// Search
+document.getElementById('searchBar')?.addEventListener('input', (e) => {
+    const q = e.target.value.toLowerCase();
+    const results = state.games.filter(g => g.name.toLowerCase().includes(q));
+    document.getElementById('searchResults').innerHTML = results.map(g => createCard(g)).join('');
+});
+
+// Starfield
+function createStars() {
+    const container = document.getElementById('stars');
+    for(let i = 0; i < 800; i++) {
+        const star = document.createElement('div');
+        star.className = 'star-layer';
+        star.style.left = Math.random()*100 + 'vw';
+        star.style.top = Math.random()*100 + 'vh';
+        star.style.opacity = Math.random()*0.8 + 0.2;
+        star.style.width = star.style.height = (Math.random()*2.5 + 0.8) + 'px';
+        container.appendChild(star);
+    }
+}
+
+createStars();
+init();
+</script>
 </body>
 </html>
