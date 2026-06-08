@@ -22,11 +22,13 @@
 }
 
 *{ margin:0; padding:0; box-sizing:border-box; }
-html,body{ height:100%; overflow:hidden; font-family:var(--title-font); }
-
-body{
+html,body{ 
+  height:100%; 
+  font-family:var(--title-font); 
+  overflow-y:auto; /* Enable scrolling */
   background:radial-gradient(140% 120% at 50% -10%, var(--bg-top) 0%, var(--bg-mid) 42%, var(--bg-bottom) 100%);
-  color:var(--text); position:relative;
+  color:var(--text); 
+  position:relative;
 }
 
 /* Background Layers */
@@ -58,28 +60,41 @@ header{
   text-shadow:0 0 30px rgba(52,240,160,.4);
 }
 
-/* Main Content */
-main{ padding-top:110px; min-height:100vh; position:relative; z-index:2; }
+/* Archive Header */
+.archive-header{
+  text-align:center; padding:140px 5vw 60px; position:relative; z-index:2;
+}
+.archive-header h1{
+  font-size:clamp(2.8rem, 7vw, 5rem); 
+  margin-bottom:0.5rem;
+  text-shadow:0 0 40px rgba(52,240,160,.3);
+}
+.archive-header p{
+  font-size:1.1rem; opacity:0.8; letter-spacing:2px;
+}
 
-/* Hero */
-.hero{
-  text-align:center; padding:10vh 5vw 6vh;
-}
-.hero h1{
-  font-size:clamp(3.8rem, 13vw, 10rem); line-height:.88; margin-bottom:1rem;
-  text-shadow:0 0 50px rgba(52,240,160,.25);
-}
+/* Main Content */
+main{ position:relative; z-index:2; padding-bottom:100px; }
 
 /* Game Grid */
 .grid-layout{
-  display:grid; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
-  gap:2rem; padding:0 5vw; max-width:1800px; margin:0 auto;
+  display:grid; 
+  grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
+  gap:2rem; 
+  padding:0 5vw; 
+  max-width:1800px; 
+  margin:0 auto;
 }
 
 .game-card{
-  background:var(--card-bg); border:1px solid var(--border);
-  border-radius:14px; overflow:hidden; transition:all .35s ease;
-  backdrop-filter:blur(10px); box-shadow:0 15px 35px rgba(0,0,0,.7);
+  background:var(--card-bg); 
+  border:1px solid var(--border);
+  border-radius:14px; 
+  overflow:hidden; 
+  transition:all .35s ease;
+  backdrop-filter:blur(10px); 
+  box-shadow:0 15px 35px rgba(0,0,0,.7);
+  cursor:pointer;
 }
 
 .game-card:hover{
@@ -96,12 +111,16 @@ main{ padding-top:110px; min-height:100vh; position:relative; z-index:2; }
 .card-title{ font-size:1.15rem; margin-bottom:0.5rem; }
 .card-tags{ font-size:0.82rem; opacity:0.75; }
 
-/* Other elements */
-#zoneViewer, .modal-overlay{
-  background:rgba(2,6,9,0.97) !important;
+/* Zone Viewer */
+#zoneViewer{
+  display:none; position:fixed; inset:0; z-index:1000; 
+  background:#020609; flex-direction:column;
 }
 
-@keyframes nebDrift{ from{transform:translate3d(0,0,0) scale(1);} to{transform:translate3d(3%,-4%,0) scale(1.12);} }
+@keyframes nebDrift{ 
+  from{transform:translate3d(0,0,0) scale(1);} 
+  to{transform:translate3d(3%,-4%,0) scale(1.12);} 
+}
 </style>
 </head>
 <body>
@@ -121,87 +140,67 @@ main{ padding-top:110px; min-height:100vh; position:relative; z-index:2; }
 </header>
 
 <main>
-  <div class="hero">
-    <h1>GAMES</h1>
+  <div class="archive-header">
+    <h1>GAME ARCHIVE</h1>
+    <p>GN MATH</p>
   </div>
 
-  <!-- Modern View -->
+  <!-- Search -->
+  <div style="text-align:center; margin-bottom:2rem;">
+    <input type="text" id="searchBar" placeholder="SEARCH GAMES..." 
+           style="background:rgba(255,255,255,0.08); border:1px solid var(--border); color:white; padding:1rem 1.5rem; border-radius:999px; width:380px; font-family:inherit; font-size:1.1rem;">
+  </div>
+
   <div id="modernView">
-    <div class="section-header">
-      <div class="section-title">Featured Zones</div>
-    </div>
-    <div class="grid-layout" id="featuredGrid"></div>
-
-    <div class="section-header">
-      <div class="section-title">Trending This Week</div>
-    </div>
-    <div class="grid-layout" id="trendingWrapper"></div>
-
-    <div class="section-header">
-      <div class="section-title">All Games</div>
-    </div>
     <div class="grid-layout" id="allGamesGrid"></div>
   </div>
 
-  <!-- Search View -->
+  <!-- Search Results -->
   <div id="searchView" class="hidden">
-    <div class="section-header">
-      <div class="section-title">Search Results</div>
-    </div>
     <div class="grid-layout" id="searchResults"></div>
   </div>
 </main>
 
 <!-- Zone Viewer -->
-<div id="zoneViewer" style="display:none; position:fixed; inset:0; z-index:1000; background:#020609;">
-  <div class="zone-header" style="padding:1rem 2rem; background:rgba(4,7,13,0.95); display:flex; justify-content:space-between; align-items:center;">
+<div id="zoneViewer">
+  <div style="padding:1.5rem 2rem; background:rgba(4,7,13,0.98); display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border);">
     <div>
-      <h2 id="zoneName" style="color:var(--accent);">Zone</h2>
-      <a id="zoneAuthor" href="#" target="_blank" style="color:#88ccaa; font-size:0.9rem;"></a>
+      <h2 id="zoneName" style="color:var(--accent); margin:0;">Loading...</h2>
+      <a id="zoneAuthor" href="#" target="_blank" style="color:#88ccaa;"></a>
     </div>
-    <div>
-      <button onclick="fullscreenZone()" style="margin:0 0.5rem;">Fullscreen</button>
+    <div style="display:flex; gap:10px;">
+      <button onclick="fullscreenZone()">Fullscreen</button>
       <button onclick="aboutBlank()">New Tab</button>
       <button onclick="downloadZone()">Download</button>
-      <button onclick="closeZone()" style="background:#e74c3c;">Close</button>
+      <button onclick="closeZone()" style="background:#e74c3c; color:white;">Close</button>
     </div>
   </div>
-  <iframe id="zoneFrame" style="width:100%; height:calc(100vh - 70px); border:none;"></iframe>
+  <iframe id="zoneFrame" style="flex:1; border:none; width:100%;"></iframe>
 </div>
 
 <script>
-// ==================== ORIGINAL GN-MATH LOGIC (kept intact) ====================
+// ==================== GAME LOGIC ====================
 const CONFIG = {
     zones: "https://cdn.jsdelivr.net/gh/freebuisness/assets@latest/zones.json",
     covers: "https://cdn.jsdelivr.net/gh/freebuisness/covers@main",
     html: "https://cdn.jsdelivr.net/gh/freebuisness/html@main"
 };
 
-let state = { games: [], hits: {} };
+let state = { games: [] };
 
 async function init() {
     try {
         const res = await fetch(CONFIG.zones + "?t=" + Date.now());
         state.games = await res.json();
-        
-        state.games[0].featured = true;
-        renderApp();
+        renderGames();
     } catch(e) {
         console.error("Failed to load games", e);
+        document.getElementById('allGamesGrid').innerHTML = "<p style='text-align:center;grid-column:1/-1;color:#ff6666;'>Failed to load games.</p>";
     }
 }
 
 function resolveUrl(u) {
     return u.replace("{COVER_URL}", CONFIG.covers).replace("{HTML_URL}", CONFIG.html);
-}
-
-function renderApp() {
-    // Featured
-    const featured = state.games.filter(g => g.featured || g.special?.includes('popular')).slice(0, 8);
-    document.getElementById('featuredGrid').innerHTML = featured.map(g => createCard(g)).join('');
-
-    // All Games
-    document.getElementById('allGamesGrid').innerHTML = state.games.map(g => createCard(g)).join('');
 }
 
 function createCard(g) {
@@ -210,9 +209,14 @@ function createCard(g) {
         <img src="${resolveUrl(g.cover)}" class="card-thumb" loading="lazy">
         <div class="card-body">
             <div class="card-title">${g.name}</div>
-            <div class="card-tags">${(g.special || []).slice(0,2).join(', ')}</div>
+            <div class="card-tags">${(g.special || []).slice(0,2).join(', ') || 'Classic'}</div>
         </div>
     </div>`;
+}
+
+function renderGames() {
+    const container = document.getElementById('allGamesGrid');
+    container.innerHTML = state.games.map(g => createCard(g)).join('');
 }
 
 async function openGame(id) {
@@ -220,23 +224,22 @@ async function openGame(id) {
     if (!g) return;
 
     document.getElementById('zoneName').textContent = g.name;
-    document.getElementById('zoneAuthor').textContent = g.author ? "by " + g.author : "";
+    document.getElementById('zoneAuthor').textContent = g.author ? `by ${g.author}` : '';
     if (g.authorLink) document.getElementById('zoneAuthor').href = g.authorLink;
 
-    const v = document.getElementById('zoneViewer');
-    const f = document.getElementById('zoneFrame');
-    v.style.display = 'flex';
+    const viewer = document.getElementById('zoneViewer');
+    viewer.style.display = 'flex';
 
     try {
-        const u = resolveUrl(g.url);
-        const r = await fetch(u + "?t=" + Date.now());
-        let h = await r.text();
-        f.contentDocument.open();
-        f.contentDocument.write(h);
-        f.contentDocument.close();
+        const url = resolveUrl(g.url);
+        const resp = await fetch(url + "?t=" + Date.now());
+        const html = await resp.text();
+        const frame = document.getElementById('zoneFrame');
+        frame.contentDocument.open();
+        frame.contentDocument.write(html);
+        frame.contentDocument.close();
     } catch(e) {
-        alert("Failed to load game");
-        closeZone();
+        alert("Could not load game. Try opening in new tab.");
     }
 }
 
@@ -246,45 +249,65 @@ function closeZone() {
 }
 
 function fullscreenZone() {
-    const f = document.getElementById('zoneFrame');
-    if (f.requestFullscreen) f.requestFullscreen();
+    const frame = document.getElementById('zoneFrame');
+    if (frame.requestFullscreen) frame.requestFullscreen();
 }
 
 function aboutBlank() {
-    const id = document.getElementById('zoneName').textContent;
-    const g = state.games.find(x => x.name === id);
+    const name = document.getElementById('zoneName').textContent;
+    const g = state.games.find(x => x.name === name);
     if (g) window.open(resolveUrl(g.url), '_blank');
 }
 
 function downloadZone() {
-    const id = document.getElementById('zoneName').textContent;
-    const g = state.games.find(x => x.name === id);
+    const name = document.getElementById('zoneName').textContent;
+    const g = state.games.find(x => x.name === name);
     if (!g) return;
-    fetch(resolveUrl(g.url)).then(r=>r.text()).then(t => {
+    fetch(resolveUrl(g.url)).then(r => r.text()).then(text => {
+        const blob = new Blob([text], {type: 'text/html'});
         const a = document.createElement('a');
-        a.href = URL.createObjectURL(new Blob([t], {type: "text/html"}));
+        a.href = URL.createObjectURL(blob);
         a.download = g.name + ".html";
         a.click();
     });
 }
 
 // Search
-document.getElementById('searchBar')?.addEventListener('input', (e) => {
-    const q = e.target.value.toLowerCase();
-    const results = state.games.filter(g => g.name.toLowerCase().includes(q));
-    document.getElementById('searchResults').innerHTML = results.map(g => createCard(g)).join('');
+const searchBar = document.getElementById('searchBar');
+searchBar.addEventListener('input', () => {
+    const q = searchBar.value.toLowerCase().trim();
+    const resultsContainer = document.getElementById('searchResults');
+    const searchView = document.getElementById('searchView');
+    const modernView = document.getElementById('modernView');
+
+    if (!q) {
+        searchView.classList.add('hidden');
+        modernView.style.display = 'block';
+        return;
+    }
+
+    modernView.style.display = 'none';
+    searchView.classList.remove('hidden');
+
+    const filtered = state.games.filter(g => 
+        g.name.toLowerCase().includes(q)
+    );
+
+    resultsContainer.innerHTML = filtered.length 
+        ? filtered.map(g => createCard(g)).join('') 
+        : `<p style="grid-column:1/-1;text-align:center;padding:4rem;color:#888;">No games found for "${q}"</p>`;
 });
 
 // Starfield
 function createStars() {
     const container = document.getElementById('stars');
-    for(let i = 0; i < 800; i++) {
+    for(let i = 0; i < 900; i++) {
         const star = document.createElement('div');
         star.className = 'star-layer';
         star.style.left = Math.random()*100 + 'vw';
         star.style.top = Math.random()*100 + 'vh';
-        star.style.opacity = Math.random()*0.8 + 0.2;
-        star.style.width = star.style.height = (Math.random()*2.5 + 0.8) + 'px';
+        star.style.opacity = Math.random() * 0.7 + 0.3;
+        star.style.width = star.style.height = (Math.random() * 2.8 + 0.6) + 'px';
         container.appendChild(star);
     }
 }
